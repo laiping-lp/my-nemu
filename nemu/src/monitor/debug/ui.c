@@ -69,7 +69,7 @@ static int cmd_x(char *args)
 	lnaddr_t address;
 	sscanf(arg1,"%d",&length);
 	sscanf(arg2,"%x",&address);
-	printf("0x%x",address);
+	printf("0x%x:",address);
 	int i = 0 ;
 	for(i = 0;i < length;i++)
 	{
