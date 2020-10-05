@@ -40,6 +40,10 @@ static int cmd_help(char *args);
 
 static int cmd_si(char *args);
 
+static int cmd_info(char *args);
+
+static int cmd_x(char *args);
+
 static struct {
 	char *name;
 	char *description;
@@ -49,11 +53,46 @@ static struct {
 	{ "c", "Continue the execution of the program", cmd_c },
 	{ "q", "Exit NEMU", cmd_q },
 	{ "si","Single step instructions",cmd_si},
+	{ "info","printf",cmd_info},
+	{ "x","scan memory",cmd_x},
 	/* TODO: Add more commands */
 
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
+
+static int cmd_x(char *args)
+{
+	char *arg1 = strtok(NULL," ");
+	char *arg2 = strtok(NULL," ");
+	int length;
+	lnaddr_t address;
+	sscanf(arg1,"%d",&length);
+	sscanf(arg2,"%x",&address);
+	printf("0x%x",address);
+	int i = 0 ;
+	for(i = 0;i < length;i++)
+	{
+		printf("%x ",lnaddr_read(address,4));
+		address+=4;
+	}
+	printf("\n");
+	return 0;
+}
+
+static int cmd_info(char *args)
+{
+	char *arg = strtok(NULL," ");
+	if(*arg == 'r')
+	{
+	int i = 0;
+	for(i = 0;i < 8 ; i++)
+	{
+	printf("%s %x %d\n",regsl[i],cpu.gpr[i]._32,cpu.gpr[i]._32);
+	}
+	}
+	return 0;	 
+}
 
 static int cmd_si(char*args)
 {
