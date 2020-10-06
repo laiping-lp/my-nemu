@@ -127,11 +127,47 @@ static bool make_token(char *e) {
 	return true; 
 }
 
+bool check_parentheses(int p,int q)
+{
+	int left = 0;
+	int flag = 0;
+	if(tokens[p].type == 40)
+	{
+		left++;
+		int i;
+		for(i = p + 1; i <= q; i++)
+		{
+			if(tokens[i].type == 40)
+			{
+			left++;
+			}
+			else if(tokens[i].type == 41)
+			{
+			left--;
+			if(left == 0 && i != q)
+			flag = 1;
+			if(left < 0)
+			assert(0);
+			}	
+		}
+	if(left == 0 && tokens[q].type == 41 && flag != 1)
+		return 1;
+	else if(left == 0)
+		return 0;
+	else 
+		assert(0);
+	}
+	else
+		return 0;
+}
+
+
 uint32_t expr(char *e, bool *success) {
 	if(!make_token(e)) {
 		*success = false;
 		return 0;
 	}
+
 
 	/* TODO: Insert codes to evaluate the expression. */
 	panic("please implement me");
