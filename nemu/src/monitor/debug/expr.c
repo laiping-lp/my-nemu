@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-	NOTYPE = 256, EQ, UEQ,Number
+	NOTYPE = 256, EQ, UEQ,Number,logical_AND,logical_OR,logical_NOT,Register,Variable,Hex,Eip
 
 	/* TODO: Add more token types */
 
@@ -29,8 +29,14 @@ static struct rule {
 	{"[0-9]{1,10}",Number},				// number
 	{"-",'-'},					// subtraction
 	{"\\*",'*'},					// multiplication
-	{"/",'/'}					// division	
-	
+	{"/",'/'},					// division	
+	{"&&",logical_AND},				//logical_AND
+	{"\\|\\|",logical_OR},				//logical_OR
+	{"!",logical_NOT},				//logical_NOT
+	{"0[xX][A-Fa-f0-9]{1,8}",Hex},			//Hex
+	{"\\$[a-dA-D][h1HL]|\\$[eE]?(ax|dx|cx|bx|bp|si|di|sp)",Register},	//Register
+	{"[a_zA_Z_][a-zA-Z0-9_]*",Variable},		//Variable	
+
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -93,6 +99,36 @@ static bool make_token(char *e) {
                                                 tokens[nr_token].type = 258;
                                                 strcpy(tokens[nr_token].str,"!=");
                                                 break;
+					case 259:
+						tokens[nr_token].type = 259;
+                                                strcpy(tokens[nr_token].str,"&&");
+                                                break;
+					case 260:
+						tokens[nr_token].type = 260;
+                                                strcpy(tokens[nr_token].str,"||");
+                                                break;
+					case 261:
+						tokens[nr_token].type = 261;
+                                                break;
+					case 262:
+						tokens[nr_token].type = 262;
+						strncpy(tokens[nr_token].str,&e[position-substr_len],substr_len);
+						break;
+					case 263:
+                                                tokens[nr_token].type = 263;
+                                                strncpy(tokens[nr_token].str,&e[position-substr_len],substr_len);
+                                                break;
+					case 264:
+                                                tokens[nr_token].type = 264;
+                                                strncpy(tokens[nr_token].str,&e[position-substr_len],substr_len);
+                                                break;
+					case 265:
+                                                tokens[nr_token].type = 265;
+                                                strncpy(tokens[nr_token].str,&e[position-substr_len],substr_len);
+                                                break;
+					case 266:
+                                                tokens[nr_token].type = 266;
+                                                break;
 					case 40:
 						tokens[nr_token].type = 40;
 						break;
@@ -112,6 +148,7 @@ static bool make_token(char *e) {
                                                 tokens[nr_token].type = 47;
                                                 break;
                                         default: panic("please implement me");
+//
 				}
 				nr_token++;
 				break;
@@ -189,11 +226,14 @@ int find_dominant_operator(int p,int q)
 	else if(tokens[j].type == 257 && (tokens[dop].type < 258 || tokens[dop].type >= 262))
                 dop = j;
 	else if(tokens[j].type == '+' && (tokens[dop].type < 256 || tokens[dop].type >= 262))
-               dop = j;
+//  261
+                dop = j;
+//j==p
 	else if(tokens[j].type == '-' && (j = p || tokens[j - 1].type >= 256 || tokens[j-1].type == ')') && (tokens[dop].type < 256 || tokens[dop].type >= 261 ))
                 dop = j;
 	else if(tokens[j].type == '/' && (tokens[dop].type >= 261 || tokens[dop].type == '(' || tokens[dop].type == '*' || tokens[dop].type == '/'))
 		dop = j;
+//j==p
 	else if(tokens[j].type == '*' && (j = p || (tokens[j-1].type >= 256 || tokens[j-1].type == ')' )) && (tokens[dop].type >= 261 || tokens[dop].type == '(' || tokens[dop].type == '*' || tokens[dop].type == '/'))
 		dop = j;
 	}	
