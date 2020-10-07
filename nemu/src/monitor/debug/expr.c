@@ -161,6 +161,45 @@ bool check_parentheses(int p,int q)
 		return 0;
 }
 
+int find_dominant_operator(int p,int q)
+{
+	int dop = p, i = 0,j = p;
+	for(;j<=p;j++)
+	{
+	if(tokens[j].type < 262 && tokens[j].type != '!')
+	{		
+		if(tokens[j].type == 40)
+		{
+		i++;
+		for(j = j + 1; tokens[j].type != 41 || i != 1; j++)
+		{
+		if(tokens[j].type == 40 )
+		i++;
+		if(tokens[j].type == 41)
+		i--;
+		}
+		i=0;
+		}
+	else if(tokens[j].type == 260)
+		dop = j;
+	else if(tokens[j].type == 259 && (tokens[dop].type < 260 || tokens[dop].type >= 262))
+		dop = j;
+	else if(tokens[j].type == 258 && (tokens[dop].type < 259 || tokens[dop].type >= 262))
+                dop = j;
+	else if(tokens[j].type == 257 && (tokens[dop].type < 258 || tokens[dop].type >= 262))
+                dop = j;
+	else if(tokens[j].type == '+' && (tokens[dop].type < 256 || tokens[dop].type >= 262))
+               dop = j;
+	else if(tokens[j].type == '-' && (j = p || tokens[j - 1].type >= 256 || tokens[j-1].type == ')') && (tokens[dop].type < 256 || tokens[dop].type >= 261 ))
+                dop = j;
+	else if(tokens[j].type == '/' && (tokens[dop].type >= 261 || tokens[dop].type == '(' || tokens[dop].type == '*' || tokens[dop].type == '/'))
+		dop = j;
+	else if(tokens[j].type == '*' && (j = p || (tokens[j-1].type >= 256 || tokens[j-1].type == ')' )) && (tokens[dop].type >= 261 || tokens[dop].type == '(' || tokens[dop].type == '*' || tokens[dop].type == '/'))
+		dop = j;
+	}	
+	}	
+	return dop;
+}
 
 uint32_t expr(char *e, bool *success) {
 	if(!make_token(e)) {
