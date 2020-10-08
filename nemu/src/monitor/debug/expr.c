@@ -202,7 +202,7 @@ bool check_parentheses(int p,int q)
 int find_dominant_operator(int p,int q)
 {
 	int dop = p, i = 0,j = p;
-	for(;j<=p;j++)
+	for(;j<=q;j++)
 	{
 	if(tokens[j].type < 262 && tokens[j].type != '!')
 	{		
