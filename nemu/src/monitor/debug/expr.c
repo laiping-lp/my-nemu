@@ -25,6 +25,8 @@ static struct rule {
 	{" +",	NOTYPE},				// spaces
 	{"\\+", '+'},					// plus
 	{"==", EQ},					// equal
+	{"\\(",'('},					//left parenthesis
+	{"\\)",')'},					//right parenthesis
 	{"!=",UEQ},					// unequal
 	{"[0-9]{1,10}",Number},				// number
 	{"-",'-'},					// subtraction
