@@ -145,20 +145,17 @@ static int cmd_si(char*args)
 	}
 	int j = 0 ;
 	if(i == -1)
-	{										cpu_exec(-1);
-	}
-	if(i > -1)
 	{
-	while(j<i)
-	{
-	j++;
 	cpu_exec(1);
-	}
 	}
 	if(i < -1)
 	{
 	printf("number error!\n");
 	return 0;
+	}
+	for(j=0;j<i;j++)
+	{
+	cpu_exec(1);
 	}
 	return 0;
 };
