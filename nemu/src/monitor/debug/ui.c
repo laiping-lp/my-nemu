@@ -153,8 +153,8 @@ static int cmd_si(char*args)
 	{
 	while(j<i)
 	{
-	cpu_exec(1);
 	j++;
+	cpu_exec(1);
 	}
 	}
 	if(i < -1)
