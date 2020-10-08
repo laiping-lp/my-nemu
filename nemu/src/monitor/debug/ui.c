@@ -44,6 +44,8 @@ static int cmd_info(char *args);
 
 static int cmd_x(char *args);
 
+static int cmd_p(char *args);
+
 static struct {
 	char *name;
 	char *description;
@@ -55,11 +57,21 @@ static struct {
 	{ "si","Single step instructions",cmd_si},
 	{ "info","printf",cmd_info},
 	{ "x","scan memory",cmd_x},
+	{ "p","expression evalution",cmd_p},			
 	/* TODO: Add more commands */
 
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
+
+static int cmd_p(char *args)
+{
+	bool success;
+	int i;
+	i = expr(args,&success);
+	printf("%d\n",i);
+	return 0;
+}
 
 static int cmd_x(char *args)
 {
