@@ -148,7 +148,8 @@ static bool make_token(char *e) {
                                                 tokens[nr_token].type = 47;
                                                 break;
                                         default: panic("please implement me");
-//
+						nr_token--;
+						break;
 				}
 				nr_token++;
 				break;
@@ -225,16 +226,16 @@ int find_dominant_operator(int p,int q)
                 dop = j;
 	else if(tokens[j].type == 257 && (tokens[dop].type < 258 || tokens[dop].type >= 262))
                 dop = j;
-	else if(tokens[j].type == '+' && (tokens[dop].type < 256 || tokens[dop].type >= 262))
+	else if(tokens[j].type == '+' && (tokens[dop].type < 256 || tokens[dop].type >= 261))
 //  261
                 dop = j;
 //j==p
-	else if(tokens[j].type == '-' && (j = p || tokens[j - 1].type >= 256 || tokens[j-1].type == ')') && (tokens[dop].type < 256 || tokens[dop].type >= 261 ))
+	else if(tokens[j].type == '-' && (j == p || tokens[j - 1].type >= 256 || tokens[j-1].type == ')') && (tokens[dop].type < 256 || tokens[dop].type >= 261 ))
                 dop = j;
 	else if(tokens[j].type == '/' && (tokens[dop].type >= 261 || tokens[dop].type == '(' || tokens[dop].type == '*' || tokens[dop].type == '/'))
 		dop = j;
 //j==p
-	else if(tokens[j].type == '*' && (j = p || (tokens[j-1].type >= 256 || tokens[j-1].type == ')' )) && (tokens[dop].type >= 261 || tokens[dop].type == '(' || tokens[dop].type == '*' || tokens[dop].type == '/'))
+	else if(tokens[j].type == '*' && (j == p || (tokens[j-1].type >= 256 || tokens[j-1].type == ')' )) && (tokens[dop].type >= 261 || tokens[dop].type == '(' || tokens[dop].type == '*' || tokens[dop].type == '/'))
 		dop = j;
 	}	
 	}	
@@ -352,24 +353,6 @@ int eval(int p,int q)
 	return 0;
 }	
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 uint32_t expr(char *e, bool *success) {
 	if(!make_token(e)) {
 		*success = false;
@@ -378,7 +361,8 @@ uint32_t expr(char *e, bool *success) {
 
 
 	/* TODO: Insert codes to evaluate the expression. */
-	panic("please implement me");
+	int a;
+	a = eval(0,nr_token);
 	return 0;
 }
 
