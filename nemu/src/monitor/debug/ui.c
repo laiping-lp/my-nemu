@@ -158,7 +158,7 @@ static int cmd_si(char *args)
 	cpu_exec(1);
 	}
 	return 0;
-};
+}
 
 static int cmd_help(char *args) {
 	/* extract the first argument */
