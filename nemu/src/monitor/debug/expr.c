@@ -250,12 +250,12 @@ int eval(int p,int q)
 	{
 		if(tokens[p].type == 264)
 		{
-		sscanf(tokens[p].str,"%d",i);
+		sscanf(tokens[p].str,"%d",&i);
 		return i;
 		}
 		else if(tokens[p].type == 265)
 		{
-		sscanf(tokens[p].str,"%x",i);
+		sscanf(tokens[p].str,"%x",&i);
 		return i;
 		}
 		else if(tokens[p].type == 262)
@@ -305,7 +305,7 @@ int eval(int p,int q)
 		else
 		{
 			int op,val1,val2;
-			if((q - p == 1) && tokens[p].type == ' - ')
+			if((q - p == 1) && tokens[p].type == '-')
 				return 0 - eval(q,q);
 			if(((q - p == 1) || (tokens[p + 1].type == '(' && tokens[q].type == ')')) && tokens[p].type == 261)
 			{
