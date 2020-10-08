@@ -8,6 +8,9 @@
 #include <readline/history.h>
 
 void cpu_exec(uint32_t);
+//WP* new_wp();
+//void free_wp(int);
+//void print_wp();
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 char* rl_gets() {
@@ -46,6 +49,10 @@ static int cmd_x(char *args);
 
 static int cmd_p(char *args);
 
+//static int cmd_w(char *args);
+
+//static int cmd_d(char* args);
+
 static struct {
 	char *name;
 	char *description;
@@ -58,11 +65,27 @@ static struct {
 	{ "info","printf",cmd_info},
 	{ "x","scan memory",cmd_x},
 	{ "p","expression evalution",cmd_p},			
+//	{ "w","Setting point",cmd_w},
+//	{ "d","Delete point",cmd_d},
 	/* TODO: Add more commands */
 
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
+
+//static int cmd_w(char *args)
+//{
+//	new_wp(args);
+//	return 0;
+//}
+
+//static int cmd_d(char *args)
+//{
+//	int i;
+//	sscanf(args,"%d",&i);
+//	free_wp(i);
+//	return 0;
+//}
 
 static int cmd_p(char *args)
 {
@@ -77,15 +100,15 @@ static int cmd_x(char *args)
 {
 	char *arg1 = strtok(NULL," ");
 	char *arg2 = strtok(NULL," ");
-	int length;
-	lnaddr_t address;
-	sscanf(arg1,"%d",&length);
+	int len;
+	swaddr_t address;
+	sscanf(arg1,"%d",&len);
 	sscanf(arg2,"%x",&address);
 	printf("0x%x:",address);
 	int i = 0 ;
-	for(i = 0;i < length;i++)
+	for(i = 0;i < len;i++)
 	{
-		printf("%02x ",lnaddr_read(address,4));
+		printf("%02x ",swaddr_read(address,4));
 		address+=4;
 	}
 	printf("\n");
@@ -103,6 +126,10 @@ static int cmd_info(char *args)
 	printf("%s %x %d\n",regsl[i],cpu.gpr[i]._32,cpu.gpr[i]._32);
 	}
 	}
+//	else if(*arg == 'w')
+//	{
+//		print_wp();
+//	}
 	return 0;	 
 }
 
@@ -126,8 +153,8 @@ static int cmd_si(char*args)
 	{
 	while(j<i)
 	{
-	j++;
 	cpu_exec(1);
+	j++;
 	}
 	}
 	if(i < -1)
