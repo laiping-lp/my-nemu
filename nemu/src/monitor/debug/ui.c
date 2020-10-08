@@ -133,7 +133,7 @@ static int cmd_info(char *args)
 	return 0;	 
 }
 
-static int cmd_si(char*args)
+static int cmd_si(char *args)
 {
 	char *arg = strtok(NULL," ");
 	int i = 0 ;
@@ -146,7 +146,7 @@ static int cmd_si(char*args)
 	int j = 0 ;
 	if(i == -1)
 	{
-	cpu_exec(1);
+	cpu_exec(-1);
 	}
 	if(i < -1)
 	{
