@@ -96,42 +96,8 @@ static bool make_token(char *e) {
 					case 257:
 						tokens[nr_token].type = 257;
 						strcpy(tokens[nr_token].str,"==");
-						break;
-					case 258:
-                                                tokens[nr_token].type = 258;
-                                                strcpy(tokens[nr_token].str,"!=");
-                                                break;
-					case 259:
-						tokens[nr_token].type = 259;
-                                                strcpy(tokens[nr_token].str,"&&");
-                                                break;
-					case 260:
-						tokens[nr_token].type = 260;
-                                                strcpy(tokens[nr_token].str,"||");
-                                                break;
-					case 261:
-						tokens[nr_token].type = 261;
-                                                break;
-					case 262:
-						tokens[nr_token].type = 262;
-						strncpy(tokens[nr_token].str,&e[position-substr_len],substr_len);
-						break;
-					case 263:
-                                                tokens[nr_token].type = 263;
-                                                strncpy(tokens[nr_token].str,&e[position-substr_len],substr_len);
-                                                break;
-					case 264:
-                                                tokens[nr_token].type = 264;
-                                                strncpy(tokens[nr_token].str,&e[position-substr_len],substr_len);
-                                                break;
-					case 265:
-                                                tokens[nr_token].type = 265;
-                                                strncpy(tokens[nr_token].str,&e[position-substr_len],substr_len);
-                                                break;
-					case 266:
-                                                tokens[nr_token].type = 266;
-                                                break;
-					case 40:
+						break;                                       
+                         		case  40:
 						tokens[nr_token].type = 40;
 						break;
 					case 41:
@@ -140,14 +106,48 @@ static bool make_token(char *e) {
 					case 42:
                                                 tokens[nr_token].type = 42;
                                                 break;
+					 case 47:
+                                                tokens[nr_token].type = 47;
+                                                break;
 					case 43:
                                                 tokens[nr_token].type = 43;
                                                 break;
 					case 45:
                                                 tokens[nr_token].type = 45;
                                                 break;
-					case 47:
-                                                tokens[nr_token].type = 47;
+					case 258:
+                                                tokens[nr_token].type = 258;
+                                                strcpy(tokens[nr_token].str,"!=");
+                                                break;
+                                        case 259:
+                                                tokens[nr_token].type = 259;
+                                                strcpy(tokens[nr_token].str,"&&");
+                                                break;
+                                        case 260:
+                                                tokens[nr_token].type = 260;
+                                                strcpy(tokens[nr_token].str,"||");
+                                                break;
+                                        case 261:
+                                                tokens[nr_token].type = 261;
+                                                break;
+                                        case 262:
+                                                tokens[nr_token].type = 262;
+                                                strncpy(tokens[nr_token].str,&e[position-substr_len],substr_len);
+                                                break;
+                                        case 263:
+                                                tokens[nr_token].type = 263;
+                                                strncpy(tokens[nr_token].str,&e[position-substr_len],substr_len);
+                                                break;
+                                        case 264:
+                                                tokens[nr_token].type = 264;
+                                                strncpy(tokens[nr_token].str,&e[position-substr_len],substr_len);
+                                                break;
+                                        case 265:
+                                                tokens[nr_token].type = 265;
+                                                strncpy(tokens[nr_token].str,&e[position-substr_len],substr_len);
+                                                break;
+                                        case 266:
+                                                tokens[nr_token].type = 266;
                                                 break;
                                         default: panic("please implement me");
 						nr_token--;
