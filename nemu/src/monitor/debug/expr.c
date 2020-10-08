@@ -131,28 +131,35 @@ static bool make_token(char *e) {
 			break;
 		case 261:
 			tokens[nr_token].type=261;
+			 strcpy(tokens[nr_token].str,"!");
 			break;
 		case 262:
 			tokens[nr_token].type=262;
 			strncpy(tokens[nr_token].str,&e[position-substr_len],substr_len);
+			tokens[nr_token].str[substr_len] = '\0';
 			break;
 		case 263:
 			tokens[nr_token].type=263;
 			strncpy(tokens[nr_token].str,&e[position-substr_len],substr_len);
+			tokens[nr_token].str[substr_len] = '\0';
 			break;
 		case 264:
 			tokens[nr_token].type=264;
 			strncpy(tokens[nr_token].str,&e[position-substr_len],substr_len);
+			tokens[nr_token].str[substr_len] = '\0';
 			break;
 		case 265:
 			tokens[nr_token].type=265;
 			strncpy(tokens[nr_token].str,&e[position-substr_len],substr_len);
+			tokens[nr_token].str[substr_len] = '\0';
 			break;
 		case 266:
 			tokens[nr_token].type=266;
+			strncpy(tokens[nr_token].str,&e[position-substr_len],substr_len);
+			tokens[nr_token].str[substr_len] = '\0';		
 			break;      
                                
-					default: panic("please implement me");
+					default: 
                                                  nr_token--;
                                                  break;
 				}
