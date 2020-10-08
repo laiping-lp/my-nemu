@@ -37,7 +37,7 @@ static struct rule {
 	{"!",logical_NOT},				//logical_NOT
 	{"0[xX][A-Fa-f0-9]{1,8}",Hex},			//Hex
 	{"\\$[a-dA-D][h1HL]|\\$[eE]?(ax|dx|cx|bx|bp|si|di|sp)",Register},	//Register
-	{"[a_zA_Z_][a-zA-Z0-9_]*",Variable},		//Variable	
+	{"[a_zA_Z_][a-zA-Z0-9_]*",Variable}		//Variable	
 
 };
 
