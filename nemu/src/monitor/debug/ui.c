@@ -8,9 +8,9 @@
 #include <readline/history.h>
 
 void cpu_exec(uint32_t);
-//WP* new_wp();
-//void free_wp(int);
-//void print_wp();
+WP* new_wp();
+void free_wp(int);
+void print_wp();
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 char* rl_gets() {
@@ -49,9 +49,9 @@ static int cmd_x(char *args);
 
 static int cmd_p(char *args);
 
-//static int cmd_w(char *args);
+static int cmd_w(char *args);
 
-//static int cmd_d(char* args);
+static int cmd_d(char* args);
 
 static struct {
 	char *name;
@@ -61,31 +61,31 @@ static struct {
 	{ "help", "Display informations about all supported commands", cmd_help },
 	{ "c", "Continue the execution of the program", cmd_c },
 	{ "q", "Exit NEMU", cmd_q },
-	{ "si","Single step instructions",cmd_si},
+	{ "si","Single step",cmd_si},
 	{ "info","printf",cmd_info},
 	{ "x","scan memory",cmd_x},
 	{ "p","expression evalution",cmd_p},			
-//	{ "w","Setting point",cmd_w},
-//	{ "d","Delete point",cmd_d},
+	{ "w","Setting point",cmd_w},
+	{ "d","Delete point",cmd_d},
 	/* TODO: Add more commands */
 
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
 
-//static int cmd_w(char *args)
-//{
-//	new_wp(args);
-//	return 0;
-//}
+static int cmd_w(char *args)
+{
+	new_wp(args);
+	return 0;
+}
 
-//static int cmd_d(char *args)
-//{
-//	int i;
-//	sscanf(args,"%d",&i);
-//	free_wp(i);
-//	return 0;
-//}
+static int cmd_d(char *args)
+{
+	int i;
+	sscanf(args,"%d",&i);
+	free_wp(i);
+	return 0;
+}
 
 static int cmd_p(char *args)
 {
@@ -126,10 +126,10 @@ static int cmd_info(char *args)
 	printf("%s %x %d\n",regsl[i],cpu.gpr[i]._32,cpu.gpr[i]._32);
 	}
 	}
-//	else if(*arg == 'w')
-//	{
-//		print_wp();
-//	}
+	else if(*arg == 'w')
+	{
+		print_wp();
+	}
 	return 0;	 
 }
 
