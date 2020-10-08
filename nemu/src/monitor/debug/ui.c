@@ -140,14 +140,12 @@ static int cmd_si(char*args)
 	sscanf(arg,"%d",&i);
 	if(arg == NULL)
 	{
-	cpu_exec(1);
-	return 0;
+		cpu_exec(1);
+		return 0;
 	}
 	int j = 0 ;
 	if(i == -1)
-	{
-	cpu_exec(-1);
-	return 0;
+	{										cpu_exec(-1);
 	}
 	if(i > -1)
 	{
