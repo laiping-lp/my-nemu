@@ -42,6 +42,7 @@ WP* new_wp(char *string)
 	regex_t reg;
 	const char * pattern = "\\$[eE][iI][pP][=][=]0x[0-9a-fA-F]{1,8}";
 	regcomp(&reg,pattern,cflags);
+//
 	status = regexec(&reg,string,nmatch,pmatch,0);
 	if(status == REG_NOMATCH)
 	help->type = 'w';
