@@ -1,6 +1,6 @@
 #include "common.h"
 #include "cpu/decode/decode.h"
-
+//#include "istream"
 /* shared by all helper function */
 Operands ops_decoded;
 
