@@ -28,3 +28,25 @@
 #include "misc/misc.h"
 
 #include "special/special.h"
+
+#include "call/call.h"
+#include "push/push.h"
+#include "test/test.h"
+#include "je/je.h"
+#include "cmp/cmp.h"
+#include "pop/pop.h"
+#include "ret/ret.h"
+
+#include "add/add.h"
+#include "adc/adc.h"
+#include "sub/sub.h"
+#include "sbb/sbb.h"
+#include "setcc/setcc.h"
+#include "jmp/jmp.h"
+
+#include "jcc/jcc.h"
+
+#include "movs/movs.h"
+#include "stos/stos.h"
+#include "scas/scas.h"
+#include "lods/lods.h"
