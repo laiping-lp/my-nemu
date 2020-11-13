@@ -33,6 +33,7 @@ kernel: $(kernel_BIN)
 game: $(game_BIN)
 
 
+
 ##### rules for cleaning the project #####
 
 clean-nemu:
@@ -54,7 +55,7 @@ clean: clean-cpp
 
 ##### some convinient rules #####
 
-USERPROG := obj/testcase/integral
+USERPROG := obj/testcase/quadratic-eq
 ENTRY := $(USERPROG)
 
 entry: $(ENTRY)
