@@ -21,7 +21,7 @@ all: nemu
 
 
 ##### rules for building the project #####
-
+               
 include nemu/Makefile.part
 include testcase/Makefile.part
 include lib-common/FLOAT/Makefile.part
