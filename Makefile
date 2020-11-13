@@ -2,6 +2,7 @@
 
 
 
+
 .PHONY: nemu entry testcase kernel run gdb test submit clean
 
 CC := gcc
@@ -59,8 +60,8 @@ clean: clean-cpp
 ##### some convinient rules #####
 
 USERPROG := obj/testcase/print-FLOAT
-ENTRY := $(USERPROG)
-#ENTRY := $(kernel_BIN)	
+#ENTRY := $(USERPROG)
+ENTRY := $(kernel_BIN)	
 
 entry: $(ENTRY)
 	objcopy -S -O binary $(ENTRY) entry
