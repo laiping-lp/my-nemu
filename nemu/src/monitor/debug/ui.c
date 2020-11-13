@@ -131,6 +131,34 @@ static int cmd_q(char *args) {
 
 static int cmd_help(char *args);
 
+void getFunctionFromAddress(swaddr_t addr, char *s);
+
+/* add the bt */
+static int cmd_bt(char *args){
+	swaddr_t ebp = reg_l(R_EBP);
+	swaddr_t ret = cpu.eip;
+	int cnt = 0;
+	int i;
+	char name[100];
+	//if ebp == 0, we get the begining of the function
+	while(ebp){
+		getFunctionFromAddress(ret, name);
+		if(name[0] == '\0') break;
+		printf("#%d 0x%x: ", ++cnt, ret);
+		printf("%s (", name);
+		for(i = 0; i < 4; i++){
+			printf("%d", swaddr_read(ebp + 8 + i*4, 4));
+			// printf("%c", i == 3 ? ')' : ',');
+			if(i == 3) printf("%c", ')');
+			else printf("%c", ',');
+		}
+		ret = swaddr_read(ebp + 4, 4);
+		ebp = swaddr_read(ebp, 4);
+		printf("\n");
+	}
+	return 0;
+}
+
 static struct {
 	char *name;
 	char *description;
@@ -141,12 +169,13 @@ static struct {
 	{ "q", "Exit NEMU", cmd_q }, 
 
 	/* TODO: Add more commands */
-        { "si", "Single step", cmd_si },
-        { "info", "info r - print register values; info w - show watch point state", cmd_info },
+    { "si", "Single step", cmd_si },
+    { "info", "info r - print register values; info w - show watch point state", cmd_info },
 	{ "x", "Examine memory", cmd_x },
-        { "p", "Evaluate the value of expression", cmd_p },
+    { "p", "Evaluate the value of expression", cmd_p },
 	{ "w", "Set watchpoint", cmd_w },
-	{ "d", "Delete watchpoint", cmd_d }
+	{ "d", "Delete watchpoint", cmd_d },
+	{ "bt", "Print the stact frame chain", cmd_bt}
 
 };
 
