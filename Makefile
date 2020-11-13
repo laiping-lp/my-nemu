@@ -1,6 +1,7 @@
 ##### global settings #####
 
 
+
 .PHONY: nemu entry testcase kernel run gdb test submit clean
 
 CC := gcc
@@ -57,7 +58,7 @@ clean: clean-cpp
 
 ##### some convinient rules #####
 
-USERPROG := obj/testcase/string
+USERPROG := obj/testcase/print-FLOAT
 ENTRY := $(USERPROG)
 #ENTRY := $(kernel_BIN)	
 
