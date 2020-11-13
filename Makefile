@@ -37,6 +37,7 @@ game: $(game_BIN)
 
 ##### rules for cleaning the project #####
 
+
 clean-nemu:
 	-rm -rf obj/nemu 2> /dev/null
 
@@ -56,7 +57,7 @@ clean: clean-cpp
 
 ##### some convinient rules #####
 
-USERPROG := obj/testcase/print-FLOAT	
+USERPROG := obj/testcase/add	
 #ENTRY := $(USERPROG)
 ENTRY := $(kernel_BIN)	
 
