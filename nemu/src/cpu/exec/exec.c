@@ -96,7 +96,7 @@ make_group(group7,
 helper_fun opcode_table [256] = {
 /* 0x00 */	add_r2rm_b, add_r2rm_v, add_rm2r_b, add_rm2r_v,
 /* 0x04 */	add_i2a_v, add_i2a_v, inv, inv,
-/* 0x08 */	or_r2rm_b, or_r2rm_v, or_rm2r_b, or_rm2r_v,
+/* 0x08 */	or_r2rm_b, or_r2rm_v, or_rm2r_b, or_rm2r_v, 
 /* 0x0c */	or_i2a_b, or_i2a_v, inv, _2byte_esc,
 /* 0x10 */	inv, adc_r2rm_v, inv, inv,
 /* 0x14 */	inv, inv, inv, inv,
@@ -126,7 +126,7 @@ helper_fun opcode_table [256] = {
 /* 0x74 */	je_i_b, jne_i_b, jbe_i_b, ja_i_b,
 /* 0x78 */	js_i_b, jns_i_b, jp_i_b, jnp_i_b,
 /* 0x7c */	jl_i_b, jge_i_b, jle_i_b, jg_i_b,
-/* 0x80 */	group1_b, group1_v, inv, group1_sx_v, 
+/* 0x80 */	group1_b, group1_v, inv, group1_sx_v,  
 /* 0x84 */	test_r2rm_b, test_r2rm_v, xchg_r2rm_b, xchg_r2rm_v,
 /* 0x88 */	mov_r2rm_b, mov_r2rm_v, mov_rm2r_b, mov_rm2r_v,
 /* 0x8c */	inv, lea, inv, inv,
@@ -229,7 +229,6 @@ helper_fun _2byte_opcode_table [256] = {
 
 make_helper(exec) {
 	ops_decoded.opcode = instr_fetch(eip, 1);
-	//printf("opcode %x  ", ops_decoded.opcode);
 	return opcode_table[ ops_decoded.opcode ](eip);
 }
 
