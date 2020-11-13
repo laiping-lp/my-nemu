@@ -7,7 +7,7 @@ FLOAT_CFLAGS_EXTRA := -O2 -m32 -fno-stack-protector -D_FORTIFY_SOURCE=0 -fno-bui
 
 FLOAT_A_OBJ := $(FLOAT_O) $(FLOAT_VFPRINTF_O)
 
-$(FLOAT): $(FLOAT_A_OBJ)
+$(FLOAT): $(FLOAT_A_OBJ) 
 	ar r $@ $^
 
 # TODO: complete the following rules
